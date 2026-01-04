@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女媧：五色神石 - 首頁</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --red: #800000;
+            --bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Noto Serif TC", "Microsoft JhengHei", serif;
+            background: radial-gradient(circle at center, #200 0%, #000 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            padding: 50px;
+            border: 3px double var(--gold);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 30px var(--gold), 0 0 60px rgba(212, 175, 55, 0.5);
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #f0e68c;
+            letter-spacing: 5px;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px auto;
+            width: 80%;
+        }
+
+        .intro-section {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .navigation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .nav-card {
+            padding: 40px 30px;
+            background: linear-gradient(135deg, rgba(128, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .nav-card:hover::before {
+            left: 100%;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .nav-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .nav-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .nav-desc {
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--red);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-text {
+            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+            }
+
+            .nav-icon {
+                font-size: 3rem;
+            }
+
+            .nav-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="main-title">女媧：五色神石</h1>
+            <p class="subtitle">九天玄火煉五色，煉石補天救蒼生</p>
+            <div class="divider"></div>
+        </header>
+
+        <section class="intro-section">
+            <p class="intro-text">
+                遠古之時，天傾西北，地陷東南。洪水泛濫，猛獸橫行，百姓苦不堪言。<br>
+                慈悲的女媧娘娘不忍蒼生受難，遂煉五色石以補蒼天。<br>
+                <strong style="color: var(--gold);">你，將踏上這段傳奇旅程...</strong>
+            </p>
+        </section>
+
+        <nav class="navigation-grid">
+            <div class="nav-card" onclick="location.href='story.html'">
+                <div class="nav-icon">📜</div>
+                <h2 class="nav-title">補天傳說</h2>
+                <p class="nav-desc">聆聽女媧娘娘補天的遠古神話，感受上古時代的波瀾壯闊</p>
+                <a href="story.html" class="nav-btn">閱讀故事</a>
+            </div>
+
+            <div class="nav-card" onclick="location.href='guess-game.html'">
+                <div class="nav-icon">🎮</div>
+                <h2 class="nav-title">神石祭壇</h2>
+                <p class="nav-desc">收集五色神石，體驗補天試煉，拯救天下蒼生黎民</p>
+                <a href="guess-game.html" class="nav-btn">開始遊戲</a>
+            </div>
+        </nav>
+
+        <footer>
+            <div class="divider"></div>
+            <p class="footer-text">女媧補天 · 傳承千年的神話傳說</p>
+        </footer>
+    </div>
+</body>
+</html>

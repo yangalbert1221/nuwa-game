@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女媧煉石補天 - 傳說故事</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --red: #800000;
+            --bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Noto Serif TC", "Microsoft JhengHei", serif;
+            background: radial-gradient(circle at center, #200 0%, #000 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px;
+            border: 3px double var(--gold);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .story-title {
+            font-size: 3rem;
+            color: var(--gold);
+            text-shadow: 0 0 30px var(--gold);
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px auto;
+            width: 80%;
+        }
+
+        /* 影片區域 */
+        .video-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 故事內容 */
+        .story-content {
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-top: 40px;
+        }
+
+        .story-content p {
+            font-size: 1.2rem;
+            line-height: 2.2;
+            color: #e8e8e8;
+            margin-bottom: 25px;
+            text-align: justify;
+            letter-spacing: 1px;
+            text-indent: 2em;
+        }
+
+        .story-content p:first-of-type {
+            font-size: 1.3rem;
+            color: #f0e68c;
+            font-weight: bold;
+            text-indent: 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* 按鈕 */
+        .btn-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--red);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            letter-spacing: 3px;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 30px var(--gold);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .story-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+
+            .story-content p {
+                font-size: 1.1rem;
+                line-height: 2;
+            }
+
+            .back-btn {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="story-title">女媧煉石補天</h1>
+            <div class="divider"></div>
+        </header>
+
+        <!-- YouTube 影片 -->
+        <section class="video-section">
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/WqTIra0vd4E" 
+                    title="女媧補天神話故事"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <!-- 故事內容 -->
+        <section class="story-content">
+            <p>女媧煉石補天</p>
+            
+            <p>很久很久以前，天和地還沒有現在這麼穩定。那時候的世界常常發生大災難，山會倒、河會亂流、火會燒地、水會淹天。</p>
+
+            <p>天上住著一位慈悲的女神，叫做<span class="highlight">女媧</span>。她有著人的上半身和蛇的下半身，心地非常善良，看到人們受苦，她就很難過。</p>
+
+            <p>有一天，<span class="highlight">天突然裂開了一個大洞</span>。</p>
+
+            <p>天空傾斜，太陽和月亮都歪了；地面也破了，洪水淹沒了村莊，火焰燒光了森林，野獸到處亂跑，大家都不知道該怎麼活下去。</p>
+
+            <p>女媧看到這樣的情景，決定要幫助世界恢復和平。</p>
+
+            <p>她想：「我要把這個破掉的天補起來。」</p>
+
+            <p>於是她開始四處尋找能修補天空的材料。</p>
+
+            <p>她翻過高山、渡過大海，終於在崆峒山下找到五種奇特的石頭——<span class="highlight">紅的、黃的、藍的、白的、黑的</span>，五顏六色，閃著光。</p>
+
+            <p>女媧就把這些石頭收集起來，用神火煉化。她一邊煉一邊祈禱，日夜不停地燒了很久很久，整整三千天。</p>
+
+            <p>終於，她把石頭煉成了<span class="highlight">五色神石</span>。</p>
+
+            <p>女媧用神力把這些石頭一塊塊嵌進天上的裂縫裡，裂口慢慢被補好，天空又變得完整、明亮。</p>
+
+            <p>天補好了，世界終於平靜下來。</p>
+
+            <p>不過，她多煉了一顆神石。那顆石頭靈氣十足、閃閃發光。女媧覺得它特別有靈性，就把它留在人間。傳說，這顆多出來的石頭後來變成了一塊有靈魂的寶玉，流傳在人世間。</p>
+
+            <p>天修好了之後，女媧又用烏龜的腿撐住四方的天空，讓天地更穩。她又讓雨水落下，熄滅大火，讓大地重新長出青草與花朵。</p>
+
+            <p>人們感謝她的恩德，開始重建家園，世界也恢復了生機。</p>
+
+            <p>從那以後，每當天空出現彩虹，人們都說——</p>
+
+            <p style="text-align: center; color: var(--gold); font-size: 1.3rem; text-indent: 0;">那是女媧留下的痕跡，是她補天時的光。</p>
+        </section>
+
+        <!-- 返回按鈕 -->
+        <div class="btn-container">
+            <a href="index.html" class="back-btn">返回首頁</a>
+        </div>
+
+        <footer>
+            <div class="divider"></div>
+            女媧補天 · 傳承千年的神話傳說
+        </footer>
+    </div>
+</body>
+</html>

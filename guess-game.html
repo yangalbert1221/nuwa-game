@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女媧：五色神石 - 補天試煉</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --red: #800000;
+            --bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Noto Serif TC", "Microsoft JhengHei", serif;
+            background: radial-gradient(circle, #200 0%, #000 100%);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .full-page {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 遊戲選擇畫面 */
+        .select-container {
+            max-width: 800px;
+            width: 90%;
+            padding: 50px;
+            border: 3px double var(--gold);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            color: var(--gold);
+            text-shadow: 0 0 30px var(--gold);
+            margin-bottom: 15px;
+            letter-spacing: 6px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #f0e68c;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px auto;
+            width: 80%;
+        }
+
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .mode-card {
+            padding: 35px;
+            background: rgba(128, 0, 0, 0.3);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .mode-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .mode-desc {
+            font-size: 1.1rem;
+            color: #ddd;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            padding: 12px 30px;
+            background: var(--red);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .mode-btn:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        /* 遊戲畫面 */
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-hud {
+            display: flex;
+            width: 650px;
+            max-width: 90vw;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 15px;
+        }
+
+        .hud-side {
+            flex: 1;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+
+        .hud-center {
+            flex: 1;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-shadow: 0 0 15px var(--gold);
+        }
+
+        .left-align {
+            text-align: left;
+        }
+
+        .right-align {
+            text-align: right;
+        }
+
+        .altar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 110px);
+            grid-gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hole {
+            width: 110px;
+            height: 110px;
+            background: #111;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .stone, .monster {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            animation: popUp 0.7s forwards;
+            cursor: pointer;
+        }
+
+        @keyframes popUp {
+            0% { transform: translateY(80px); }
+            40% { transform: translateY(0); }
+            100% { transform: translateY(0); }
+        }
+
+        .game-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .slogan-small {
+            color: var(--gold);
+            letter-spacing: 3px;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        /* 結算畫面 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-box {
+            background: #111;
+            border: 3px double var(--gold);
+            padding: 50px;
+            text-align: center;
+            min-width: 400px;
+            max-width: 90vw;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+        }
+
+        #result-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px var(--gold);
+        }
+
+        .final-score-text {
+            font-size: 1.5rem;
+            color: #ddd;
+            margin: 30px 0;
+        }
+
+        .final-score-text span {
+            color: var(--gold);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            padding: 12px 30px;
+            background: var(--red);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .action-btn:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .altar-grid {
+                grid-template-columns: repeat(3, 90px);
+                grid-gap: 15px;
+            }
+
+            .hole {
+                width: 90px;
+                height: 90px;
+            }
+
+            .stone, .monster {
+                width: 60px;
+                height: 60px;
+                top: 15px;
+                left: 15px;
+            }
+
+            .game-hud {
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .modal-box {
+                padding: 30px;
+                min-width: auto;
+            }
+
+            .modal-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 遊戲模式選擇畫面 -->
+    <div id="select-screen" class="full-page">
+        <div class="select-container">
+            <h1 class="main-title">神石祭壇</h1>
+            <p class="subtitle">選擇試煉難度</p>
+            <div class="divider"></div>
+
+            <div class="mode-grid">
+                <div class="mode-card">
+                    <h2 class="mode-title">初階祭壇</h2>
+                    <div class="mode-desc">
+                        • 限時 30 秒<br>
+                        • 收集 30 神力以上<br>
+                        • 適合初次嘗試
+                    </div>
+                    <button class="mode-btn" onclick="startGame('basic')">開始試煉</button>
+                </div>
+
+                <div class="mode-card">
+                    <h2 class="mode-title">進階祭壇</h2>
+                    <div class="mode-desc">
+                        • 限時 30 秒<br>
+                        • 收集 9 神力以上<br>
+                        • ⚠️ 點到鬼怪扣 1 分
+                    </div>
+                    <button class="mode-btn" onclick="startGame('advanced')">開始試煉</button>
+                </div>
+            </div>
+
+            <a href="index.html" class="back-btn">返回首頁</a>
+        </div>
+    </div>
+
+    <!-- 遊戲畫面 -->
+    <div id="game-screen" class="full-page hidden">
+        <div class="game-container">
+            <div class="game-hud">
+                <div class="hud-side left-align">剩餘時辰：<span id="timer">30</span>s</div>
+                <div class="hud-center">祭壇</div>
+                <div class="hud-side right-align">神力：<span id="score">0</span></div>
+            </div>
+            
+            <div class="altar-grid">
+                <div class="hole" id="h0"></div>
+                <div class="hole" id="h1"></div>
+                <div class="hole" id="h2"></div>
+                <div class="hole" id="h3"></div>
+                <div class="hole" id="h4"></div>
+                <div class="hole" id="h5"></div>
+                <div class="hole" id="h6"></div>
+                <div class="hole" id="h7"></div>
+                <div class="hole" id="h8"></div>
+            </div>
+
+            <footer class="game-footer">
+                <p class="slogan-small">九天玄火煉五色，煉石補天救蒼生</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- 結算畫面 -->
+    <div id="result-overlay" class="overlay hidden">
+        <div class="modal-box">
+            <h1 id="result-title">補天結果</h1>
+            <div class="divider"></div>
+            <p class="final-score-text">最終收集神力：<span id="final-score">0</span></p>
+            <div class="modal-btns">
+                <button class="action-btn" onclick="restartGame()">再次試煉</button>
+                <button class="action-btn" onclick="goHome()">返回首頁</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 30;
+        let gameActive = false;
+        let gameMode = 'basic';
+        let gameInterval, spawnTimeout;
+
+        const holes = document.querySelectorAll('.hole');
+        const scoreLabel = document.getElementById('score');
+        const timerLabel = document.getElementById('timer');
+
+        function startGame(mode) {
+            gameMode = mode;
+            document.getElementById('select-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            startGameProcess();
+        }
+
+        function startGameProcess() {
+            score = 0;
+            timeLeft = 30;
+            gameActive = true;
+            scoreLabel.innerText = score;
+            timerLabel.innerText = timeLeft;
+
+            // 清空所有洞
+            holes.forEach(h => h.innerHTML = '');
+
+            gameInterval = setInterval(() => {
+                timeLeft--;
+                timerLabel.innerText = timeLeft;
+                if(timeLeft <= 0) endGameProcess();
+            }, 1000);
+
+            spawnElement();
+        }
+
+        function spawnElement() {
+            if(!gameActive) return;
+
+            const idx = Math.floor(Math.random() * holes.length);
+            const hole = holes[idx];
+            hole.innerHTML = ''; 
+
+            const isMonster = (gameMode === 'advanced' && Math.random() < 0.3);
+            const div = document.createElement('div');
+            
+            if(isMonster) {
+                div.className = 'monster';
+                div.style.background = 'radial-gradient(circle, #444, #000)';
+                div.innerHTML = "<span style='font-size:40px; display:flex; justify-content:center; align-items:center; height:100%'>💀</span>";
+            } else {
+                const colors = ['#FF3131','#39FF14','#1F51FF','#FFFF33','#FFFFFF'];
+                const selectedColor = colors[Math.floor(Math.random() * 5)];
+                div.className = 'stone';
+                div.style.backgroundColor = selectedColor;
+                div.style.boxShadow = `0 0 30px ${selectedColor}`;
+            }
+
+            hole.appendChild(div);
+
+            div.onclick = (e) => {
+                e.stopPropagation();
+                if(isMonster) {
+                    score--;
+                } else {
+                    score++;
+                }
+                scoreLabel.innerText = score;
+                div.remove();
+            };
+
+            setTimeout(() => { 
+                if(div.parentNode) div.remove(); 
+            }, 700);
+
+            const nextTime = Math.floor(Math.random() * 400) + 400;
+            spawnTimeout = setTimeout(spawnElement, nextTime);
+        }
+
+        function endGameProcess() {
+            gameActive = false;
+            clearInterval(gameInterval);
+            clearTimeout(spawnTimeout);
+            
+            const finalScoreEl = document.getElementById('final-score');
+            const resultTitle = document.getElementById('result-title');
+            const threshold = (gameMode === 'basic') ? 30 : 9;
+
+            resultTitle.innerText = (score >= threshold) ? "✨ 補天成功 ✨" : "補天失敗";
+            finalScoreEl.innerText = score;
+            document.getElementById('result-overlay').classList.remove('hidden');
+        }
+
+        function restartGame() {
+            document.getElementById('result-overlay').classList.add('hidden');
+            startGameProcess();
+        }
+
+        function goHome() {
+            gameActive = false;
+            clearInterval(gameInterval);
+            clearTimeout(spawnTimeout);
+            document.getElementById('result-overlay').classList.add('hidden');
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('select-screen').classList.remove('hidden');
+            holes.forEach(h => h.innerHTML = '');
+        }
+    </script>
+</body>
+</html>
